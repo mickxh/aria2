@@ -2,6 +2,7 @@ name: build
 
 on: [push, pull_request]
 
+
 jobs:
   build:
     strategy:
@@ -93,10 +94,6 @@ jobs:
           --disable-nls
     - name: Build aria2
       run: |
-        make -j"$(nproc 2> /dev/null || sysctl -n hw.ncpu)" check
-    - name: Create a Release
-      uses: elgohr/Github-Release-Action@v5
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-      with:
-        title: Release binary
+        make -j"$(nproc 2> /dev/null || sysctl -n hw.ncpu)"
+    - name: Release
+      uses: softprops/action-gh-release@v1
