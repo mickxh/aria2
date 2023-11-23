@@ -33,7 +33,6 @@ jobs:
           libtool \
           pkg-config \
           libssl-dev \
-          libgnutls28-dev \
           libc-ares-dev \
           zlib1g-dev \
           libsqlite3-dev \
