@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-22.04, macos-11]
-        compiler: [gcc, clang]
+        compiler: [clang]
         crypto: [openssl]
         bittorrent: [with-bt]
         exclude:
@@ -81,10 +81,6 @@ jobs:
         FEATURE_FLAGS="$FEATURE_FLAGS --disable-bittorrent"
 
         echo 'FEATURE_FLAGS='"$FEATURE_FLAGS" >> $GITHUB_ENV
-    - name: Configure autotools (Linux, gnutls)
-      if: runner.os == 'Linux' && matrix.crypto == 'gnutls'
-      run: |
-        ./configure --with-gnutls --without-openssl $FEATURE_FLAGS
     - name: Configure autotools (Linux, openssl)
       if: runner.os == 'Linux' && matrix.crypto == 'openssl'
       run: |
@@ -98,3 +94,9 @@ jobs:
     - name: Build aria2
       run: |
         make -j"$(nproc 2> /dev/null || sysctl -n hw.ncpu)" check
+    - name: Create a Release
+      uses: elgohr/Github-Release-Action@v5
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      with:
+        title: Release binary
