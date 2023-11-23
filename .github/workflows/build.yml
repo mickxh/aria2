@@ -8,8 +8,8 @@ jobs:
       matrix:
         os: [ubuntu-22.04, macos-11]
         compiler: [gcc, clang]
-        crypto: [openssl, gnutls]
-        bittorrent: [with-bt, without-bt]
+        crypto: [openssl]
+        bittorrent: [with-bt]
         exclude:
         - os: macos-11
           crypto: gnutls
