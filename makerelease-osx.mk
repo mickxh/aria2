@@ -101,52 +101,52 @@ export LDFLAGS
 LTO_FLAGS = -flto -ffunction-sections -fdata-sections
 
 # Dependency versions
-zlib_version = 1.2.11
-zlib_hash = c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
+zlib_version = 1.3
+zlib_hash = ff0ba4c292013dbc27530b3a81e1f9a813cd39de01ca5e0f8bf355702efa593e
 zlib_url = http://zlib.net/zlib-$(zlib_version).tar.gz
 
-expat_version = 2.2.8
-expat_hash = bd507cba42716ca9afe46dd3687fb0d46c09347517beb9770f53a435d2c67ea0
-expat_url = https://github.com/libexpat/libexpat/releases/download/R_2_2_8/expat-2.2.8.tar.gz
+expat_version = 2.5.0
+expat_hash = 6b902ab103843592be5e99504f846ec109c1abb692e85347587f237a4ffa1033
+expat_url = https://github.com/libexpat/libexpat/releases/download/R_2_5_0/expat-2.5.0.tar.gz
 expat_cflags=$(CFLAGS) $(LTO_FLAGS)
 expat_ldflags=$(CFLAGS) $(LTO_FLAGS)
 
-cares_version = 1.15.0
-cares_hash = 6cdb97871f2930530c97deb7cf5c8fa4be5a0b02c7cea6e7c7667672a39d6852
+cares_version = 1.22.1
+cares_hash = f67c180deb799c670d9dda995a18ce06f6c7320b6c6363ff8fa85b77d0da9db8
 cares_url = https://c-ares.haxx.se/download/c-ares-$(cares_version).tar.gz
 cares_confflags = "--enable-optimize=$(OPTFLAGS)"
 cares_cflags=$(CFLAGS) $(LTO_FLAGS)
 cares_ldflags=$(CFLAGS) $(LTO_FLAGS)
 
-sqlite_version = autoconf-3300000
-sqlite_hash = e0a8cf4c7a87455e55e10413d16f358ca121ccec687fe1301eac95e2d340fc58
-sqlite_url = https://sqlite.org/2019/sqlite-$(sqlite_version).tar.gz
+sqlite_version = autoconf-3440100
+sqlite_hash = 63c3181633844adb5e36187f75b8f31a51cd32487992a26b89bf26b22ecdcf48
+sqlite_url = https://sqlite.org/2023/sqlite-$(sqlite_version).tar.gz
 sqlite_cflags=$(CFLAGS) $(LTO_FLAGS)
 sqlite_ldflags=$(CFLAGS) $(LTO_FLAGS)
 
-gmp_version = 6.1.2
-gmp_hash = 5275bb04f4863a13516b2f39392ac5e272f5e1bb8057b18aec1c9b79d73d8fb2
+gmp_version = 6.3.0
+gmp_hash = ac28211a7cfb609bae2e2c8d6058d66c8fe96434f740cf6fe2e47b000d1c20cb
 gmp_url = https://ftp.gnu.org/gnu/gmp/gmp-$(gmp_version).tar.bz2
 gmp_confflags = --disable-cxx --enable-assembly --with-pic --enable-fat
 gmp_cflags=$(CFLAGS)
 gmp_cxxflags=$(CXXFLAGS)
 
-libgpgerror_version = 1.36
-libgpgerror_hash = babd98437208c163175c29453f8681094bcaf92968a15cafb1a276076b33c97c
+libgpgerror_version = 1.47
+libgpgerror_hash = 9e3c670966b96ecc746c28c2c419541e3bcb787d1a73930f5e5f5e1bcbbb9bdb
 libgpgerror_url = https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-$(libgpgerror_version).tar.bz2
 libgpgerror_cflags=$(CFLAGS) $(LTO_FLAGS)
 libgpgerror_ldflags=$(CFLAGS) $(LTO_FLAGS)
 libgpgerror_confflags = --with-pic --disable-languages --disable-doc --disable-nls
 
-libgcrypt_version = 1.8.5
-libgcrypt_hash = 3b4a2a94cb637eff5bdebbcaf46f4d95c4f25206f459809339cdada0eb577ac3
+libgcrypt_version = 1.10.3
+libgcrypt_hash = 8b0870897ac5ac67ded568dcfadf45969cfa8a6beb0fd60af2a9eadc2a3272aa
 libgcrypt_url = https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-$(libgcrypt_version).tar.bz2
 libgcrypt_confflags=--with-gpg-error-prefix=$(PWD)/arch --disable-O-flag-munging --disable-asm --disable-amd64-as-feature-detection
 libgcrypt_cflags=$(PLATFORMFLAGS)
 libgcrypt_cxxflags=$(PLATFORMFLAGS)
 
-libssh2_version = 1.9.0
-libssh2_hash = d5fb8bd563305fd1074dda90bd053fb2d29fc4bce048d182f96eaa466dfadafd
+libssh2_version = 1.11.0
+libssh2_hash = 3736161e41e2693324deb38c26cfdc3efe6209d634ba4258db1cecff6a5ad461
 libssh2_url = https://www.libssh2.org/download/libssh2-$(libssh2_version).tar.gz
 libssh2_cflags=$(CFLAGS) $(LTO_FLAGS)
 libssh2_cxxflags=$(CXXFLAGS) $(LTO_FLAGS)
@@ -424,7 +424,6 @@ $(ARIA2_DIST).dmg: $(ARIA2_DIST).pkg
 		-volname "aria2 $(VERSION) Intel" \
 		-ov
 	hdiutil convert -format UDBZ -o $@ $@.uncompressed.dmg
-	hdiutil flatten $@
 	rm -rf $@.uncompressed.dmg dmg
 
 dist.build: $(ARIA2_DIST).tar.bz2 $(ARIA2_DIST).pkg $(ARIA2_DIST).dmg
